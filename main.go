@@ -18,7 +18,7 @@ func init(){
 	db_charset :=beego.AppConfig.String("db_charset")
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=%s",db_user,db_pass,db_host,db_port,db_name,db_charset)
 	orm.RegisterDataBase("default","mysql",dsn)
-	orm.RunSyncdb("default",false,true)
+	orm.RunSyncdb("default",true,true)
 }
 
 func main() {
