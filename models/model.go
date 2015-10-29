@@ -17,12 +17,13 @@ func (u *User) TableName() string {
 }
 
 type Content struct {
-	Id       int64    `orm:"auto;pk"`
-	Title    string   `orm:"size(255)"`
-	Filepath string   `orm:"size(500)"`
-	Content  string   `orm:"type(text);null"`
-	User     *User    `orm:"rel(fk)"`
-	Company  *Company `orm:"rel(fk)"`
+	Id       int64     `orm:"auto;pk"`
+	Title    string    `orm:"size(255)"`
+	Filepath string    `orm:"size(500)"`
+	Content  string    `orm:"type(text);null"`
+	User     *User     `orm:"rel(fk)"`
+	Company  *Company  `orm:"rel(fk)"`
+	Category *Category `orm:"rel(fk)"`
 }
 
 func (c *Content) TableName() string {
@@ -40,7 +41,18 @@ func (company *Company) TableName() string {
 	return "companys"
 }
 
+type Category struct {
+	Id       int64  `orm:"auto;pk"`
+	Name     string `orm:"size(100)"`
+	Pid      int64
+	Contents []*Content `orm:"reverse(many)"`
+}
+
+func (category *Category) TableName() string {
+	return "categorys"
+}
+
 func init() {
 	db_prefix := beego.AppConfig.String("db_prefix")
-	orm.RegisterModelWithPrefix(db_prefix, new(User), new(Content), new(Company))
+	orm.RegisterModelWithPrefix(db_prefix, new(User), new(Content), new(Company), new(Category))
 }
