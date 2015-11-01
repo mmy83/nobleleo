@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/mmy83/nobleleo/models"
@@ -24,5 +25,16 @@ func (this *CompanyController) Store() {
 }
 
 func (this *CompanyController) Index(){
-	this.TplNames="index.tpl"
+	var companys []models.Company
+	o := orm.NewOrm()
+	company := new(models.Company)
+	qs := o.QueryTable(company)
+	//qs.Filter("","")
+	num ,_ := qs.All(&companys)
+	fmt.Print(num,companys)
+	this.Data["companys"]=companys
+	this.TplNames="admin/company/index.tpl"
 }
+
+
+
