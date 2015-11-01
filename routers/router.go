@@ -3,8 +3,13 @@ package routers
 import (
 	"github.com/astaxie/beego"
 	"github.com/mmy83/nobleleo/controllers"
+	"github.com/mmy83/nobleleo/controllers/admin"
 )
 
 func init() {
 	beego.Router("/", &controllers.MainController{})
+	beego.Router("/admin/welcome", &admin.HomeController{}, "get:Welcome")
+
+	beego.Router("/admin/company/create", &admin.CompanyController{}, "get:Create;post:Store")
+	beego.Router("/admin/company",&admin.CompanyController{},"get:Index")
 }

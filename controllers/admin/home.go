@@ -8,6 +8,6 @@ type HomeController struct {
 	beego.Controller
 }
 
-func (c *HomeController) Get() {
+func (c *HomeController) Welcome() {
 	c.TplNames = "admin/content/get.tpl"
 }
