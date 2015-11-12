@@ -1,27 +1,29 @@
+
+<ul id="data">
 {{range .companys}}
-	{{.Symbol}}:{{.Sname}}
+	<li>{{.Symbol}}:{{.Sname}}</li>
 {{end}}
-11111
+</ul>
 {{if gt .paginator.PageNums 1}}
-<ul class="pagination pagination-sm">
+<div class="pagination pagination-sm">
     {{if .paginator.HasPrev}}
-        <li><a href="{{.paginator.PageLinkFirst}}">第一页</a></li>
-        <li><a href="{{.paginator.PageLinkPrev}}">&lt;</a></li>
+        <span><a href="{{.paginator.PageLinkFirst}}">&lt;&lt;</a></span>
+        <span><a href="{{.paginator.PageLinkPrev}}">&lt;</a></span>
     {{else}}
-        <li class="disabled"><a>第一页</a></li>
-        <li class="disabled"><a>&lt;</a></li>
+        <span class="disabled"><a>&lt;&lt;</a></span>
+        <span class="disabled"><a>&lt;</a></span>
     {{end}}
     {{range $index, $page := .paginator.Pages}}
-        <li{{if $.paginator.IsActive .}} class="active"{{end}}>
-            <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
-        </li>
+        <span{{if $.paginator.IsActive .}} class="active"{{end}}>
+            <b><a href="{{$.paginator.PageLink $page}}">{{$page}}</a></b>
+        </span>
     {{end}}
     {{if .paginator.HasNext}}
-        <li><a href="{{.paginator.PageLinkNext}}">&gt;</a></li>
-        <li><a href="{{.paginator.PageLinkLast}}">最后一页</a></li>
+        <span><a href="{{.paginator.PageLinkNext}}">&gt;</a></span>
+        <span><a href="{{.paginator.PageLinkLast}}">&gt;&gt;</a></span>
     {{else}}
-        <li class="disabled"><a>&gt;</a></li>
-        <li class="disabled"><a>最后一页</a></li>
+        <span class="disabled"><a>&gt;</a></span>
+        <span class="disabled"><a>&gt;&gt;</a></span>
     {{end}}
-</ul>
+</div>
 {{end}}
