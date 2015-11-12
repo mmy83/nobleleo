@@ -15,7 +15,7 @@
     {{end}}
     {{range $index, $page := .paginator.Pages}}
         <span{{if $.paginator.IsActive .}} class="active"{{end}}>
-            <b><a href="{{$.paginator.PageLink $page}}">{{$page}}</a></b>
+           <a href="{{$.paginator.PageLink $page}}">{{$page}}</a>
         </span>
     {{end}}
     {{if .paginator.HasNext}}
