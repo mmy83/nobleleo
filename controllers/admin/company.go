@@ -88,3 +88,15 @@ func (this *CompanyController) Update(){
 	
 }
 
+func (this *CompanyController) Del(){
+	id,_ := strconv.Atoi(this.Ctx.Input.Param(":id"))
+	beego.Debug("id=",id)
+	o := orm.NewOrm()
+	if num, err := o.Delete(&models.Company{Id: int64(id)}); err == nil {
+	    beego.Debug(num)
+		this.Redirect("/admin/company/", 302)
+	}else{
+		beego.Error(err)
+	}
+}
+
