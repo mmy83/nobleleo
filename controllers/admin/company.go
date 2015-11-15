@@ -2,6 +2,7 @@ package admin
 
 import (
 	"fmt"
+	"strconv"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/utils/pagination"
@@ -47,3 +48,43 @@ func (this *CompanyController) Index() {
 	this.Data["paginator"] = paginator
 	this.TplNames = "admin/company/index.tpl"
 }
+
+func (this *CompanyController) Edit(){
+	o := orm.NewOrm()
+	id , _:= strconv.Atoi(this.GetString("id"))
+	company := models.Company{Id:int64(id)}
+	error := o.Read(&company)
+	if error != nil {
+		fmt.Println(error)
+	}
+	this.Data["company"] = company
+	this.TplNames = "admin/company/edit.tpl"
+	
+	
+}
+
+func (this *CompanyController) Update(){
+	
+	o := orm.NewOrm()
+	id,_ := strconv.Atoi(this.GetString("Id"))
+	company := models.Company{Id:int64(id)}
+	error := o.Read(&company)
+	beego.Debug(error)
+	if error == nil{
+		beego.Debug("start")
+		company.Sname = this.GetString("Sname")
+		company.Symbol = this.GetString("Symbol")
+		_,error_u := o.Update(&company,"sname","symbol")
+		if error_u != nil{
+			beego.Error(error_u)
+		}else{
+			this.Redirect("/admin/company", 302)
+		}
+	}else{
+		beego.Error(error)
+		this.Redirect("/admin/company/edit?id="+strconv.Itoa(id),302)
+	}
+	
+	
+}
+
