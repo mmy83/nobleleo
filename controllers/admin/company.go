@@ -23,7 +23,7 @@ func (this *CompanyController) Store() {
 	company.Sname = this.GetString("Sname")
 	o := orm.NewOrm()
 	o.Insert(company)
-	this.Redirect("/admin/company", 302)
+	this.Redirect(beego.UrlFor("CompanyController.Index"), 302)
 }
 
 func (this *CompanyController) Index() {
@@ -78,11 +78,11 @@ func (this *CompanyController) Update(){
 		if error_u != nil{
 			beego.Error(error_u)
 		}else{
-			this.Redirect("/admin/company", 302)
+			this.Redirect(beego.UrlFor("CompanyController.Index"), 302)
 		}
 	}else{
 		beego.Error(error)
-		this.Redirect("/admin/company/edit?id="+strconv.Itoa(id),302)
+		this.Redirect(beego.UrlFor("CompanyController.Edit","id",strconv.Itoa(id)),302)
 	}
 	
 	
@@ -94,7 +94,7 @@ func (this *CompanyController) Del(){
 	o := orm.NewOrm()
 	if num, err := o.Delete(&models.Company{Id: int64(id)}); err == nil {
 	    beego.Debug(num)
-		this.Redirect("/admin/company/", 302)
+		this.Redirect(beego.UrlFor("CompanyController.Index"), 302)
 	}else{
 		beego.Error(err)
 	}
