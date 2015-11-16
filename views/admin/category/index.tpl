@@ -1,8 +1,8 @@
 
 <ul id="data">
-{{range .companys}}
+{{range .categorys}}
 	<li>
-		{{.Symbol}}:{{.Sname}}->{{.Pid}}
+		{{.Id}}:{{.Name}}
 		&nbsp;&nbsp;
 		<a href="{{urlfor "CompanyController.Edit" "id" .Id}}">编辑</a>
 		&nbsp;&nbsp;

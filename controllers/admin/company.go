@@ -2,11 +2,11 @@ package admin
 
 import (
 	"fmt"
-	"strconv"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/utils/pagination"
 	"github.com/mmy83/nobleleo/models"
+	"strconv"
 )
 
 type CompanyController struct {
@@ -38,10 +38,10 @@ func (this *CompanyController) Index() {
 	//nums := int64(10)
 	fmt.Print(nums, companys)
 	beego.Debug(nums)
-	
-	paginator := pagination.SetPaginator(this.Ctx,perPage,nums)
-	qs = qs.Limit(perPage,paginator.Offset())
-	
+
+	paginator := pagination.SetPaginator(this.Ctx, perPage, nums)
+	qs = qs.Limit(perPage, paginator.Offset())
+
 	beego.Debug(paginator.Offset())
 	qs.All(&companys)
 	this.Data["companys"] = companys
@@ -49,54 +49,51 @@ func (this *CompanyController) Index() {
 	this.TplNames = "admin/company/index.tpl"
 }
 
-func (this *CompanyController) Edit(){
+func (this *CompanyController) Edit() {
 	o := orm.NewOrm()
-	id , _:= strconv.Atoi(this.GetString("id"))
-	company := models.Company{Id:int64(id)}
+	id, _ := strconv.Atoi(this.GetString("id"))
+	company := models.Company{Id: int64(id)}
 	error := o.Read(&company)
 	if error != nil {
 		fmt.Println(error)
 	}
 	this.Data["company"] = company
 	this.TplNames = "admin/company/edit.tpl"
-	
-	
+
 }
 
-func (this *CompanyController) Update(){
-	
+func (this *CompanyController) Update() {
+
 	o := orm.NewOrm()
-	id,_ := strconv.Atoi(this.GetString("Id"))
-	company := models.Company{Id:int64(id)}
+	id, _ := strconv.Atoi(this.GetString("Id"))
+	company := models.Company{Id: int64(id)}
 	error := o.Read(&company)
 	beego.Debug(error)
-	if error == nil{
+	if error == nil {
 		beego.Debug("start")
 		company.Sname = this.GetString("Sname")
 		company.Symbol = this.GetString("Symbol")
-		_,error_u := o.Update(&company,"sname","symbol")
-		if error_u != nil{
+		_, error_u := o.Update(&company, "sname", "symbol")
+		if error_u != nil {
 			beego.Error(error_u)
-		}else{
+		} else {
 			this.Redirect(beego.UrlFor("CompanyController.Index"), 302)
 		}
-	}else{
+	} else {
 		beego.Error(error)
-		this.Redirect(beego.UrlFor("CompanyController.Edit","id",strconv.Itoa(id)),302)
+		this.Redirect(beego.UrlFor("CompanyController.Edit", "id", strconv.Itoa(id)), 302)
 	}
-	
-	
+
 }
 
-func (this *CompanyController) Del(){
-	id,_ := strconv.Atoi(this.Ctx.Input.Param(":id"))
-	beego.Debug("id=",id)
+func (this *CompanyController) Del() {
+	id, _ := strconv.Atoi(this.Ctx.Input.Param(":id"))
+	beego.Debug("id=", id)
 	o := orm.NewOrm()
 	if num, err := o.Delete(&models.Company{Id: int64(id)}); err == nil {
-	    beego.Debug(num)
+		beego.Debug(num)
 		this.Redirect(beego.UrlFor("CompanyController.Index"), 302)
-	}else{
+	} else {
 		beego.Error(err)
 	}
 }
-
