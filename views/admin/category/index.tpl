@@ -1,12 +1,15 @@
+<a href="{{urlfor "CategoryController.Create" "pid" "0"}}">添加分类</a>
 
 <ul id="data">
 {{range .categorys}}
 	<li>
-		{{.Id}}:{{.Name}}
+		{{.Id}}:{{.Name}}->{{.Pid}}
 		&nbsp;&nbsp;
-		<a href="{{urlfor "CompanyController.Edit" "id" .Id}}">编辑</a>
+		<a href="{{urlfor "CategoryController.Edit" "id" .Id}}">编辑</a>
 		&nbsp;&nbsp;
-		<a href="{{urlfor "CompanyController.Del" ":id" .Id}}">删除</a>
+		<a href="{{urlfor "CategoryController.Del" "id" .Id}}">删除</a>
+		&nbsp;&nbsp;
+		<a href="{{urlfor "CategoryController.Create" "pid" .Id}}">添加子分类</a>
 	</li>
 {{end}}
 </ul>

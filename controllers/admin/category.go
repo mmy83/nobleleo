@@ -6,6 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/mmy83/nobleleo/models"
 	"github.com/astaxie/beego/utils/pagination"
+	"strconv"
 )
 
 type CategoryController struct {
@@ -28,9 +29,27 @@ func (this *CategoryController) Index() {
 }
 
 func (this *CategoryController) Create(){
+	pid ,_ := strconv.Atoi(this.GetString("pid","0"))
+	o := orm.NewOrm()
+	category := models.Category{Id:int64(pid)}
+	//category.Id = int64(pid)
+	err := o.Read(&category)
+	if err!=nil{
+		beego.Error(err)
+	}
+	this.Data["category"] = category
 	this.TplNames = "admin/category/create.tpl"
 }
 
 func (this *CategoryController) Store(){
+	pid, _:= strconv.Atoi(this.GetString("Pid"))
+	name := this.GetString("Name")
+	o := orm.NewOrm()
+	category := new(models.Category)
+	category.Pid = int64(pid)
+	category.Name = name
+	//category := &models.Category{Pid:int64(pid),Name:name}
+	o.Insert(category)
+	this.Redirect(beego.UrlFor("CategoryController.Index"),302)
 	
 }
