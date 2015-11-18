@@ -14,7 +14,7 @@ type CategoryController struct {
 }
 
 func (this *CategoryController) Index() {
-	perPage := 2
+	perPage := 1000
 	o := orm.NewOrm()
 	var categorys []models.Category
 	category := new(models.Category)
@@ -53,3 +53,28 @@ func (this *CategoryController) Store(){
 	this.Redirect(beego.UrlFor("CategoryController.Index"),302)
 	
 }
+
+func (this * CategoryController)Edit(){
+	id,_ :=strconv.Atoi(this.GetString("id"))
+	o := orm.NewOrm()
+	category := models.Category{Id:int64(id)}
+	o.Read(&category)
+	this.Data["category"] = category
+	this.TplNames = "admin/category/edit.tpl"
+}
+ 
+func (this * CategoryController)Update(){
+	id,_ :=strconv.Atoi(this.GetString("Id"))
+	name := this.GetString("Name")
+	o := orm.NewOrm()
+	category := models.Category{Id:int64(id)}
+	error := o.Read(&category)
+	if error!=nil{
+		beego.Error("error=",error)
+	}
+	beego.Debug("category=",category)
+	category.Name = name
+	beego.Debug("category=",category)
+	o.Update(&category,"name")
+	this.Redirect(beego.UrlFor("CategoryController.Index"),302)
+} 

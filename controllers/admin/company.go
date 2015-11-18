@@ -27,7 +27,7 @@ func (this *CompanyController) Store() {
 }
 
 func (this *CompanyController) Index() {
-	perPage := 2
+	perPage := 20
 	//paginator := pagination.SetPaginator(this.Ctx,perPage,int64(20))
 	var companys []models.Company
 	o := orm.NewOrm()
