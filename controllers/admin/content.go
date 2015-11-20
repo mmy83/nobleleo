@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"time"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/mmy83/nobleleo/models"
@@ -39,6 +40,12 @@ func (this *ContentController) Create() {
 func (this *ContentController) Store() {
 	o := orm.NewOrm()
 	
+	f,h,_ := this.GetFile("Filepath")
+	defer f.Close()
+	
+	newfile := "./upload/"+time.Now().Format("20151121")+"/"+h.Filename
+	this.SaveToFile("Filepath",newfile)
+	
 	company_id,_ := this.GetInt64("company_id")
 	company := models.Company{Id: company_id}
 	o.Read(&company)
@@ -61,6 +68,7 @@ func (this *ContentController) Store() {
 	content.Content = Content
 	content.Category = &category
 	content.Company = &company
+	content.Filepath = newfile
 	content.User = &user
 	
 	beego.Debug(content)
