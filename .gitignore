@@ -2,3 +2,5 @@
 nobleleo
 .DS_Store
 *.swp
+upload/*
+static/upload/*
