@@ -1,6 +1,7 @@
 package admin
 
 import (
+	"os"
 	"time"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
@@ -43,7 +44,11 @@ func (this *ContentController) Store() {
 	f,h,_ := this.GetFile("Filepath")
 	defer f.Close()
 	
-	newfile := "./upload/"+time.Now().Format("20151121")+"/"+h.Filename
+	newdir := "./static/upload/"+time.Now().Format("20151121")
+	beego.Debug(newdir)
+	os.MkdirAll(newdir,0777)
+	newfile := newdir+"/"+h.Filename
+	
 	this.SaveToFile("Filepath",newfile)
 	
 	company_id,_ := this.GetInt64("company_id")
