@@ -1,3 +1,4 @@
 *.exe
 nobleleo
 .DS_Store
+*.swp
