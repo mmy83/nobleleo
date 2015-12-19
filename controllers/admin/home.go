@@ -9,5 +9,5 @@ type HomeController struct {
 }
 
 func (c *HomeController) Welcome() {
-	c.TplNames = "admin/content/get.tpl"
+	c.TplNames = "admin/home/index.tpl"
 }

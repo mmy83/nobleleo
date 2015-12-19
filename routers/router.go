@@ -24,4 +24,8 @@ func init() {
 	beego.Router("/admin/content",&admin.ContentController{},"get:Index")
 	beego.Router("/admin/content/create", &admin.ContentController{}, "get:Create;post:Store")
 	beego.Router("/admin/content/edit",&admin.ContentController{},"get:Edit;post:Update")
+	
+	//home
+	beego.Router("/admin/home",&admin.HomeController{},"get:Welcome")
+	beego.Router("/admin/home/welcome",&admin.HomeController{},"get:Welcome")
 }
