@@ -8,8 +8,14 @@ import (
 
 func init() {
 	beego.Router("/", &controllers.MainController{})
+	
+	//home
+	beego.Router("/admin/home",&admin.HomeController{},"get:Welcome")
+	beego.Router("/admin/home/welcome",&admin.HomeController{},"get:Welcome")
 	beego.Router("/admin/welcome", &admin.HomeController{}, "get:Welcome")
-
+	beego.Router("/admin", &admin.HomeController{}, "get:Welcome")
+	
+	//company
 	beego.Router("/admin/company/create", &admin.CompanyController{}, "get:Create;post:Store")
 	beego.Router("/admin/company",&admin.CompanyController{},"get:Index")
 	beego.Router("/admin/company/edit",&admin.CompanyController{},"get:Edit;post:Update")
@@ -25,7 +31,5 @@ func init() {
 	beego.Router("/admin/content/create", &admin.ContentController{}, "get:Create;post:Store")
 	beego.Router("/admin/content/edit",&admin.ContentController{},"get:Edit;post:Update")
 	
-	//home
-	beego.Router("/admin/home",&admin.HomeController{},"get:Welcome")
-	beego.Router("/admin/home/welcome",&admin.HomeController{},"get:Welcome")
+	
 }
