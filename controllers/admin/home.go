@@ -12,3 +12,7 @@ func (c *HomeController) Welcome() {
 	//c.Layout = "admin/layout/main.tpl"
 	c.TplNames = "admin/home/index.tpl"
 }
+
+func (c *HomeController) Login(){
+	c.TplNames = "admin/home/login.tpl"
+}
