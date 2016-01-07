@@ -7,6 +7,7 @@ import (
 	"github.com/astaxie/beego/utils/pagination"
 	"github.com/mmy83/nobleleo/models"
 	"strconv"
+	"github.com/astaxie/beego/validation"
 )
 
 type CompanyController struct {
@@ -21,6 +22,19 @@ func (this *CompanyController) Store() {
 	company := &models.Company{}
 	company.Symbol = this.GetString("Symbol")
 	company.Sname = this.GetString("Sname")
+	valid := validation.Validation{}
+	b, err := valid.Valid(company)
+	if err != nil {
+	// handle error
+		beego.Debug(err)
+	}
+	if !b {
+		// validation does not pass
+		// blabla...
+		for _, err := range valid.Errors {
+			beego.Debug(err.Message)
+		}
+	}
 	o := orm.NewOrm()
 	o.Insert(company)
 	this.Redirect(beego.UrlFor("CompanyController.Index"), 302)
