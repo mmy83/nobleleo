@@ -5,9 +5,9 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/mmy83/nobleleo/filters"
 	_ "github.com/mmy83/nobleleo/models"
 	_ "github.com/mmy83/nobleleo/routers"
-	_ "github.com/mmy83/nobleleo/filters"
 )
 
 func init() {

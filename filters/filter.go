@@ -13,7 +13,6 @@ var FilterUser = func(ctx *context.Context) {
 	}
 }
 
-
-func init(){
-	//beego.InsertFilter("/admin/*",beego.BeforeRouter,FilterUser)	
+func init() {
+	//beego.InsertFilter("/admin/*",beego.BeforeRouter,FilterUser)
 }

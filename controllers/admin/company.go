@@ -5,9 +5,9 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/utils/pagination"
+	"github.com/astaxie/beego/validation"
 	"github.com/mmy83/nobleleo/models"
 	"strconv"
-	"github.com/astaxie/beego/validation"
 )
 
 type CompanyController struct {
@@ -25,7 +25,7 @@ func (this *CompanyController) Store() {
 	valid := validation.Validation{}
 	b, err := valid.Valid(company)
 	if err != nil {
-	// handle error
+		// handle error
 		beego.Debug(err)
 	}
 	if !b {

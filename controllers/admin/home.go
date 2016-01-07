@@ -13,6 +13,6 @@ func (c *HomeController) Welcome() {
 	c.TplNames = "admin/home/index.tpl"
 }
 
-func (c *HomeController) Login(){
+func (c *HomeController) Login() {
 	c.TplNames = "admin/home/login.tpl"
 }

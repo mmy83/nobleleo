@@ -1,10 +1,10 @@
 package models
 
 import (
-//	"strings"
+	//	"strings"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-//	"github.com/astaxie/beego/validation"
+	//	"github.com/astaxie/beego/validation"
 )
 
 type User struct {
