@@ -33,18 +33,11 @@ func (c *Content) TableName() string {
 }
 
 type Company struct {
-	Id       int64      `orm:"auto;pk"`
-	Symbol   string     `orm:"size(6)"    valid:"Required;Match(/^3.*/)"`
-	Sname    string     `orm:"size(20)"`
-	Contents []*Content `orm:"reverse(many)"`
+	Id       int64      `orm:"auto;pk" form:"-"`
+	Symbol   string     `orm:"size(6)"  form:"Symbol"   valid:"Required;Length(6)"`
+	Sname    string     `orm:"size(20)"  form:"Sname"  varlid:"Required"`
+	Contents []*Content `orm:"reverse(many)"  form:"-"`
 }
-
-//func (company *Company) Valid(v *validation.Validation) {
-//	if strings.Index(company.Symbol, "6") != -1 {
-//		// 通过 SetError 设置 Name 的错误信息，HasErrors 将会返回 true
-//		v.SetError("Symbol", "名称里不能含有 6")
-//	}
-//}
 
 func (company *Company) TableName() string {
 	return "companys"

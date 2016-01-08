@@ -2,7 +2,7 @@
 <ul id="data">
 {{range .contents}}
 	<li>
-		{{.Id}}:{{.Title}}->{{.User.Username}}->{{.Company.Sname}}
+		{{.Id}}:{{.Title}}->{{.Category.Name}}->{{.Company.Sname}}
 		&nbsp;&nbsp;
 		<a href="{{urlfor "ContentController.Edit" "id" .Id}}">编辑</a>
 		&nbsp;&nbsp;

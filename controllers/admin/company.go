@@ -20,8 +20,9 @@ func (c *CompanyController) Create() {
 
 func (this *CompanyController) Store() {
 	company := &models.Company{}
-	company.Symbol = this.GetString("Symbol")
-	company.Sname = this.GetString("Sname")
+	//company.Symbol = this.GetString("Symbol")
+	//company.Sname = this.GetString("Sname")
+	this.ParseForm(company)
 	valid := validation.Validation{}
 	b, err := valid.Valid(company)
 	if err != nil {
@@ -85,8 +86,9 @@ func (this *CompanyController) Update() {
 	beego.Debug(error)
 	if error == nil {
 		beego.Debug("start")
-		company.Sname = this.GetString("Sname")
-		company.Symbol = this.GetString("Symbol")
+		//company.Sname = this.GetString("Sname")
+		//company.Symbol = this.GetString("Symbol")
+		this.ParseForm(&company)
 		_, error_u := o.Update(&company, "sname", "symbol")
 		if error_u != nil {
 			beego.Error(error_u)

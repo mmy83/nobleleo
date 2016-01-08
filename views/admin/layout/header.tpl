@@ -13,13 +13,13 @@
     <link href="/static/startbootstrap/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
 
     <!-- Timeline CSS -->
-    <link href="/static/startbootstrap/dist/css/timeline.css" rel="stylesheet">
+     <!-- <link href="/static/startbootstrap/dist/css/timeline.css" rel="stylesheet"> -->
 
     <!-- Custom CSS -->
     <link href="/static/startbootstrap/dist/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
-    <link href="/static/startbootstrap/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <!-- <link href="/static/startbootstrap/bower_components/morrisjs/morris.css" rel="stylesheet"> -->
 
     <!-- Custom Fonts -->
     <link href="/static/startbootstrap/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

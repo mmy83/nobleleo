@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	"github.com/mmy83/nobleleo/models"
+	"github.com/astaxie/beego/utils/pagination"
 	"os"
 	"time"
 )
@@ -13,14 +14,20 @@ type ContentController struct {
 }
 
 func (this *ContentController) Index() {
+	perPage := 1000
 	var contents []models.Content
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(models.Content)).RelatedSel()
-	qs.All(&contents)
+	qs := o.QueryTable(new(models.Content))
+	num,_ := qs.Count()
+	paginator := pagination.SetPaginator(this.Ctx, perPage, num)
+	qs = qs.Limit(perPage, paginator.Offset())
+	qs.RelatedSel().All(&contents)
 
 	beego.Debug(contents)
 
 	this.Data["contents"] = contents
+	this.Data["paginator"] = paginator
+	
 	this.TplNames = "admin/content/index.tpl"
 }
 
