@@ -3,8 +3,8 @@ package admin
 import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
-	"github.com/mmy83/nobleleo/models"
 	"github.com/astaxie/beego/utils/pagination"
+	"github.com/mmy83/nobleleo/models"
 	"os"
 	"time"
 )
@@ -18,7 +18,7 @@ func (this *ContentController) Index() {
 	var contents []models.Content
 	o := orm.NewOrm()
 	qs := o.QueryTable(new(models.Content))
-	num,_ := qs.Count()
+	num, _ := qs.Count()
 	paginator := pagination.SetPaginator(this.Ctx, perPage, num)
 	qs = qs.Limit(perPage, paginator.Offset())
 	qs.RelatedSel().All(&contents)
@@ -27,7 +27,7 @@ func (this *ContentController) Index() {
 
 	this.Data["contents"] = contents
 	this.Data["paginator"] = paginator
-	
+
 	this.TplNames = "admin/content/index.tpl"
 }
 
